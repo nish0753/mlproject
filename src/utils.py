@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 import dill
 
+from sklearn.metrics import r2_score
+
 from src.exception import CustomException
 
 def save_object(file_path, obj):
@@ -47,3 +49,23 @@ def save_model(model, file_path):
         print(f"Model saved successfully at {file_path}")
     except Exception as e:
         raise CustomException(e, sys)
+
+def evaluate_models(x_train, y_train, models, x_test, y_test):
+    try:
+        report = {}
+        for i in range(len(list(models))):
+            model = list(models.values())[i] 
+
+            model.fit(x_train, y_train) # train model
+
+            y_train_pred = model.predict(x_train) # predict on train data
+            y_test_pred = model.predict(x_test) # predict on test data
+
+            train_model_score = r2_score(y_train, y_train_pred) # evaluate model on train data
+            test_model_score = r2_score(y_test, y_test_pred) # evaluate model on test data
+
+            report[list(models.keys())[i]] = test_model_score
+        return report
+    except Exception as e:
+        raise CustomException(e, sys)
+           
