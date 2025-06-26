@@ -92,3 +92,17 @@ Special thanks to [Krish Naik](https://www.linkedin.com/in/krishnaik06/) for his
 **GitHub:** [nish0753/mlproject](https://github.com/nish0753/mlproject)
 
 ---
+
+## ⚠️ Troubleshooting AWS Deployments
+
+If you delete a file (like `app.py`) from your repo and AWS Elastic Beanstalk or CodePipeline still references it, follow these steps:
+
+1. **Verify on GitHub** that the file is truly deleted from your main branch.
+2. **Delete old application versions** in the Elastic Beanstalk console:
+   - Go to your application.
+   - Click on **Application versions** in the sidebar.
+   - Delete all old versions except the most recent one.
+3. **Trigger a fresh deployment** by making a small change (e.g., edit `README.md`), commit, and push.
+4. **If the problem persists**, delete and recreate your Elastic Beanstalk environment and CodePipeline for a clean start.
+
+This ensures AWS uses only the current files in your repo and stops referencing deleted files.
