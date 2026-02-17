@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Artifacts - keep only pkl files, ignore CSVs and training logs
+artifacts/*.csv
+notebook/
+catboost_info/
+INTERVIEW_PREP_GUIDE.*
+
 # C extensions
 *.so
 
